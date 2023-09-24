@@ -4,15 +4,35 @@ $(document).ready(function(){
         slidesToShow: 5,
         slidesToScroll: 1,
         arrows: false,
-        speed: 300
+        autoplay: true,
+        speed: 1000,
+        responsive: [
+            {
+              breakpoint: 780,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            }
+          ]
       });
 
     $('.preloader, .overlay').fadeOut(2000);
+    
     var zero = 0;
 
     $(window).on('scroll', function(){
       $('.promo').toggleClass('hide', $(window).scrollTop() > zero);
       zero = $(window).scrollTop();
+      console.log(zero)
     })
 
     $(".menu__link").on('click', function(event) {
@@ -25,9 +45,9 @@ $(document).ready(function(){
           // Store hash
           var hash = this.hash;
           
-          // $('.menu').removeClass('menu_active');
-          // $('span').removeClass('active-line');
-          // $('body').removeClass('scroll-y');
+          $('.menu').removeClass('active');
+          $('span').removeClass('active-line');
+          $('body').removeClass('scroll-y');
 
           // Using jQuery's animate() method to add smooth page scroll
           // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
@@ -42,9 +62,9 @@ $(document).ready(function(){
   });
 
   $('.burger').on('click', function(){
-    // $('.menu').toggleClass('menu_active');
+    $('.menu').toggleClass('active');
     $('span').toggleClass('active-line');
-    // $('body').toggleClass('scroll-y');
+    $('body').toggleClass('scroll-y');
   })
 
 

@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $('.carousel__body').slick({
+    $('.carousel-img__body').slick({
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 8,
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
@@ -19,6 +19,32 @@ $(document).ready(function(){
               breakpoint: 480,
               settings: {
                 slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            }
+          ]
+      });
+
+      $('.kleimo__block').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: true,
+        speed: 1000,
+        responsive: [
+            {
+              breakpoint: 780,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
                 slidesToScroll: 1
               }
             }

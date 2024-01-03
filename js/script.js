@@ -51,6 +51,32 @@ $(document).ready(function(){
           ]
       });
 
+      $('.technique-carousel').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay: true,
+        speed: 1000,
+        responsive: [
+            {
+              breakpoint: 780,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+      });
+
     $('.preloader, .overlay').fadeOut(2000);
     
     var zero = 0;

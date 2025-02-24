@@ -55,14 +55,14 @@ $(document).ready(function(){
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         autoplay: true,
         speed: 1000,
         responsive: [
             {
               breakpoint: 780,
               settings: {
-                slidesToShow: 2,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
               }

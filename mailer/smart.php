@@ -3,45 +3,40 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$name = $_POST['name'];
-$phone = $_POST['number'];
-$email = $_POST['email'];
-
 require_once('phpmailer/PHPMailerAutoload.php');
+
+$name = isset($_POST['name']) ? $_POST['name'] : '';
+$phone = isset($_POST['number']) ? $_POST['number'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+
 $mail = new PHPMailer;
 $mail->CharSet = 'utf-8';
 
-// $mail->SMTPDebug = 3;                               // Enable verbose debug output
+// $mail->SMTPDebug = 2; // Включить отладку
 
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp.tmzsk.kz';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'sait@tmzsk.kz';                 // Наш логин
-$mail->Password = 'Aa51cy1barin@!';                           // Наш пароль от ящика
-$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 465;                                    // TCP port to connect to
- 
-$mail->setFrom('sait@tmzsk.kz', 'tmzsk.kz');   // От кого письмо 
-$mail->addAddress('info@tmzsk.kz');     // Add a recipient
-//$mail->addAddress('ellen@example.com');               // Name is optional
-//$mail->addReplyTo('info@example.com', 'Information');
-//$mail->addCC('cc@example.com');
-//$mail->addBCC('bcc@example.com');
-//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-$mail->isHTML(true);                                  // Set email format to HTML
+$mail->isSMTP();
+$mail->Host = 'smtp.tmzsk.kz';
+$mail->SMTPAuth = true;
+$mail->Username = 'sait@tmzsk.kz';
+$mail->Password = 'Aa51cy1barin@!';
+$mail->SMTPSecure = 'ssl';
+$mail->Port = 465;
 
+$mail->setFrom('sait@tmzsk.kz', 'tmzsk.kz'); // исправлено
+$mail->addAddress('info@tmzsk.kz');
+
+$mail->isHTML(true);
 $mail->Subject = 'Данные';
 $mail->Body    = '
-		Пользователь оставил данные <br> 
-	Имя: ' . $name . ' <br>
-	Номер телефона: ' . $phone . '<br>
-	E-mail: ' . $email . '';
+	Пользователь оставил данные <br> 
+	Имя: ' . htmlspecialchars($name) . ' <br>
+	Номер телефона: ' . htmlspecialchars($phone) . '<br>
+	E-mail: ' . htmlspecialchars($email) . '';
 
 if(!$mail->send()) {
-    return false;
+    echo "error: " . $mail->ErrorInfo; // Выводим ошибку в AJAX
 } else {
-    return true;
+    echo "success"; // Отправляем успешный ответ
 }
 
 ?>

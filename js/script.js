@@ -158,24 +158,50 @@ $('#consultation form').validate({
 $('input[name=number]').mask("+7 (999) 999-99-99");
 
 $(document).ready(function(){
-        $('form').submit(function(e) {
-          e.preventDefault(); // предотвращаем стандартную отправку формы
+  $('form').submit(function(e) {
+    e.preventDefault();
 
-          let $form = $(this); // сохраняем ссылку на текущую форму
+    let $form = $(this);
 
-          $.ajax({
-              type: 'POST',
-              url: 'mailer/smart.php',
-              data: $form.serialize()
-          }).done(function() {
-              $form.find("input").val(""); // очищаем только текущую форму
-              $('#consultation').fadeOut();
-              $('.page, #done').fadeIn('slow');
-              $form.trigger('reset'); // сбрасываем форму
-          });
+    $.ajax({
+        type: 'POST',
+        url: '/mailer/smart.php',
+        data: $form.serialize(),
+        success: function(response) {
+            console.log("Ответ сервера:", response); // Выведет success или ошибку
+            if (response.trim() === "success") {
+                $form.find("input").val("");
+                $('#consultation').fadeOut();
+                $('.page, #done').fadeIn('slow');
+                $form.trigger('reset');
+            } else {
+                alert("Ошибка отправки: " + response);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Ошибка AJAX:", status, error);
+            alert("Ошибка при отправке формы! Проверьте консоль.");
+        }
+    });
+});
+      //   $('form').submit(function(e) {
+      //     e.preventDefault(); // предотвращаем стандартную отправку формы
 
-          return false; // предотвращаем перезагрузку страницы
-      });
+      //     let $form = $(this); // сохраняем ссылку на текущую форму
+
+      //     $.ajax({
+      //         type: 'POST',
+      //         url: 'mailer/smart.php',
+      //         data: $form.serialize()
+      //     }).done(function() {
+      //         $form.find("input").val(""); // очищаем только текущую форму
+      //         $('#consultation').fadeOut();
+      //         $('.page, #done').fadeIn('slow');
+      //         $form.trigger('reset'); // сбрасываем форму
+      //     });
+
+      //     return false; // предотвращаем перезагрузку страницы
+      // });
       // $('form').submit(function(e){
       //   e.preventDefault();
       

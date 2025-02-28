@@ -11,7 +11,7 @@ $mail->CharSet = 'utf-8';
 // $mail->SMTPDebug = 3;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'mail.tmzsk.kz';  // Specify main and backup SMTP servers
+$mail->Host = 'smtp.tmzsk.kz';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'sait@tmzsk.kz';                 // Наш логин
 $mail->Password = 'Aa51cy1barin@!';                           // Наш пароль от ящика

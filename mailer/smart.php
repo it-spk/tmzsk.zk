@@ -12,7 +12,7 @@ $email = isset($_POST['email']) ? $_POST['email'] : '';
 $mail = new PHPMailer;
 $mail->CharSet = 'utf-8';
 
-// $mail->SMTPDebug = 2; // Включить отладку
+$mail->SMTPDebug = 2; // Включить отладку
 
 $mail->isSMTP();
 $mail->Host = 'mail.tmzsk.kz';

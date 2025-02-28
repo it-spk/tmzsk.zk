@@ -120,7 +120,64 @@ $(document).ready(function(){
   })
 
 
+
+  // Кнопка связаться со мной
+  $('[data-modal=consultation]').on('click', function(){
+    $('.page, #consultation').fadeIn('slow');
+  })
+  $('.modal__close').on('click', function(){
+    $('.page, #consultation, #done').fadeOut('slow');
+  })
+
 });
+
+
+$('#consultation form').validate({
+  rules: {
+    name: {
+      required: true,
+      minlength: 2
+    },
+    number: "required",
+    email: {
+      required: true,
+      email: true
+    }
+  },
+    messages: {
+      name: "Пожалуйста, введите свое имя",
+      number: "Пожалуйста, введите свой номер телефона",
+      email: {  
+        required: "Пожалуйста, введите свою почту",
+        email: "Неправильно введен адрес почты"
+      }
+    }
+});
+
+$('input[name=number]').mask("+7 (999) 999-99-99");
+
+$('form').submit(function(e){
+  e.preventDefault();
+
+  if(!$(this).valid()) {
+    return;
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "mailer/smart.php",
+    data: $(this).serialize()
+  }).done(function(){
+    $(this).find("input").val("");
+
+    $('#consultaion').fadeOut();
+    $('.overlay, #done').fadeIn('slow');
+
+    $('form').trigger('reset');
+  })
+  return false;
+});
+
 
 
 // javascript

@@ -158,27 +158,45 @@ $('#consultation form').validate({
 $('input[name=number]').mask("+7 (999) 999-99-99");
 
 $(document).ready(function(){
-      $('form').submit(function(e){
-        e.preventDefault();
-      
-        if(!$(this).valid()) {
-          return;
-        }
-      
-        $.ajax({
-          type: 'POST',
-          url: 'mailer/smart.php',
-          data: $(this).serialize()
-        }).done(function(){
-          $(this).find("input").val("");
-      
-          $('#consultation').fadeOut();
-          $('.page, #done').fadeIn('slow');
-      
-          $('form').trigger('reset');
-        })
-        return false;
+        $('form').submit(function(e) {
+          e.preventDefault(); // предотвращаем стандартную отправку формы
+
+          let $form = $(this); // сохраняем ссылку на текущую форму
+
+          $.ajax({
+              type: 'POST',
+              url: 'mailer/smart.php',
+              data: $form.serialize()
+          }).done(function() {
+              $form.find("input").val(""); // очищаем только текущую форму
+              $('#consultation').fadeOut();
+              $('.page, #done').fadeIn('slow');
+              $form.trigger('reset'); // сбрасываем форму
+          });
+
+          return false; // предотвращаем перезагрузку страницы
       });
+      // $('form').submit(function(e){
+      //   e.preventDefault();
+      
+      //   if(!$(this).valid()) {
+      //     return;
+      //   }
+      
+      //   $.ajax({
+      //     type: 'POST',
+      //     url: 'mailer/smart.php',
+      //     data: $(this).serialize()
+      //   }).done(function(){
+      //     $(this).find("input").val("");
+      
+      //     $('#consultation').fadeOut();
+      //     $('.page, #done').fadeIn('slow');
+      
+      //     $('form').trigger('reset');
+      //   })
+      //   return false;
+      // });
 }); 
 
 

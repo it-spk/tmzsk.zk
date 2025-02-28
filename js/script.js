@@ -170,8 +170,8 @@ $('form').submit(function(e){
   }).done(function(){
     $(this).find("input").val("");
 
-    $('#consultaion').fadeOut();
-    $('.overlay, #done').fadeIn('slow');
+    $('#consultation').fadeOut();
+    $('.page, #done').fadeIn('slow');
 
     $('form').trigger('reset');
   })

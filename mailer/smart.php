@@ -15,7 +15,7 @@ $mail->CharSet = 'utf-8';
 $mail->SMTPDebug = 2; // Включить отладку
 
 $mail->isSMTP();
-$mail->Host = 'mail.tmzsk.kz';
+$mail->Host = 'tmzsk.kz';
 $mail->SMTPAuth = true;
 $mail->Username = 'sait@tmzsk.kz';
 $mail->Password = 'Aa51cy1barin@!';

@@ -111,6 +111,8 @@ $(document).ready(function(){
           window.location.hash = hash;
           });
       } // End if
+
+
   });
 
   $('.burger').on('click', function(){
@@ -156,7 +158,7 @@ $('#consultation form').validate({
 
 $('input[name=number]').mask("+7 (999) 999-99-99");
 
-$('form').submit(function(e){
+$('form').submit(function(e) {
   e.preventDefault();
 
   if(!$(this).valid()) {

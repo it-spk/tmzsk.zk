@@ -19,8 +19,8 @@ $mail->Host = 'tmzsk.kz';
 $mail->SMTPAuth = true;
 $mail->Username = 'sait@tmzsk.kz';
 $mail->Password = 'Aa51cy1barin@!';
-$mail->SMTPSecure = 'ssl';
-$mail->Port = 465;
+$mail->SMTPSecure = '';
+$mail->Port = 25;
 
 $mail->setFrom('sait@tmzsk.kz', 'tmzsk.kz'); // исправлено
 $mail->addAddress('info@tmzsk.kz');
